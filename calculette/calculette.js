@@ -97,9 +97,7 @@ function total(string) {
 function invalidOperator(string, bool = false) {
   const operators = ["+", "-", "*", "/"];
   for (const operator of operators) {
-    console.log(string.length);
     if (string.length == 0 && bool == true) {
-      console.log(operator);
       return true;
     } else if (string.endsWith(operator) || string.length == 0) {
       return false;
