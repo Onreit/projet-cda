@@ -24,15 +24,30 @@ boutons.forEach((bouton, indice) => {
       resultat.textContent += "9";
     } else if (bouton.innerHTML.includes("fa-c")) {
       resultat.textContent = "";
-    } else if (bouton.innerHTML.includes("fa-minus")) {
+    } else if (
+      bouton.innerHTML.includes("fa-minus") &&
+      invalidOperator(resultat.textContent, true)
+    ) {
       resultat.textContent += "-";
-    } else if (bouton.innerHTML.includes("fa-xmark")) {
+    } else if (
+      bouton.innerHTML.includes("fa-xmark") &&
+      invalidOperator(resultat.textContent)
+    ) {
       resultat.textContent += "*";
-    } else if (bouton.innerHTML.includes("fa-divide")) {
+    } else if (
+      bouton.innerHTML.includes("fa-divide") &&
+      invalidOperator(resultat.textContent)
+    ) {
       resultat.textContent += "/";
-    } else if (bouton.innerHTML.includes("fa-plus")) {
+    } else if (
+      bouton.innerHTML.includes("fa-plus") &&
+      invalidOperator(resultat.textContent)
+    ) {
       resultat.textContent += "+";
-    } else if (bouton.innerHTML.includes("fa-equal")) {
+    } else if (
+      bouton.innerHTML.includes("fa-equal") &&
+      invalidOperator(resultat.textContent)
+    ) {
       resultat.textContent = total(resultat.textContent);
     }
   });
@@ -77,4 +92,18 @@ function total(string) {
   } else {
     return 0;
   }
+}
+
+function invalidOperator(string, bool = false) {
+  const operators = ["+", "-", "*", "/"];
+  for (const operator of operators) {
+    console.log(string.length);
+    if (string.length == 0 && bool == true) {
+      console.log(operator);
+      return true;
+    } else if (string.endsWith(operator) || string.length == 0) {
+      return false;
+    }
+  }
+  return true;
 }
